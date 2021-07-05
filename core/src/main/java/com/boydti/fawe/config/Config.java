@@ -448,8 +448,10 @@ public class Config {
      */
     private void setAccessible(Field field) throws NoSuchFieldException, IllegalAccessException {
         field.setAccessible(true);
-        Field modifiersField = Field.class.getDeclaredField("modifiers");
-        modifiersField.setAccessible(true);
-        modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
+        try {
+        	Field modifiersField = field.getClass().getDeclaredField("modifiers");
+        	modifiersField.setAccessible(true);
+        	modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
+        } catch (NoSuchFieldException e) {}
     }
 }
