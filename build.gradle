@@ -91,6 +91,7 @@ subprojects {
 
     compileJava {
         options.compilerArgs += ["-parameters"]
+		options.encoding = "UTF-8"
     }
 
     repositories {
@@ -100,7 +101,9 @@ subprojects {
         maven {url "https://repo.destroystokyo.com/repository/maven-public//"}
         //maven {url "https://ci.emc.gs/nexus/content/groups/aikar/" }
         maven {url "https://ci.athion.net/plugin/repository/tools/"}
+        maven {url "https://jitpack.io"}
         mavenLocal()
+        maven {url "https://repo.codemc.org/repository/maven-public"}
         maven {url "https://hub.spigotmc.org/nexus/content/groups/public/"}
         maven {url "https://maven.enginehub.org/repo/"}
         maven {url "https://repo.maven.apache.org/maven2"}

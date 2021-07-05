@@ -9,10 +9,6 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.*;
 
-import sun.reflect.ConstructorAccessor;
-import sun.reflect.FieldAccessor;
-import sun.reflect.ReflectionFactory;
-
 /**
  * @author DPOH-VAR
  * @version 1.0
@@ -105,18 +101,19 @@ public class ReflectionUtils {
         parms[0] = value;
         parms[1] = Integer.valueOf(ordinal);
         System.arraycopy(additionalValues, 0, parms, 2, additionalValues.length);
-        return enumClass.cast(getConstructorAccessor(enumClass, additionalTypes).newInstance(parms));
+        return enumClass.getConstructor(additionalTypes).newInstance(parms);
+        //return enumClass.cast(getConstructorAccessor(enumClass, additionalTypes).newInstance(parms));
     }
 
-    private static ConstructorAccessor getConstructorAccessor(Class<?> enumClass,
+    /*private static ConstructorAccessor getConstructorAccessor(Class<?> enumClass,
                                                               Class<?>[] additionalParameterTypes) throws NoSuchMethodException {
         Class<?>[] parameterTypes = new Class[additionalParameterTypes.length + 2];
         parameterTypes[0] = String.class;
         parameterTypes[1] = int.class;
         System.arraycopy(additionalParameterTypes, 0,
                 parameterTypes, 2, additionalParameterTypes.length);
-        return ReflectionFactory.getReflectionFactory().newConstructorAccessor(enumClass.getDeclaredConstructor(parameterTypes));
-    }
+        return ReflectionFactory.getReflectionFactory()..newConstructorAccessor(enumClass.getDeclaredConstructor(parameterTypes));
+    }*/
 
     public static void setFailsafeFieldValue(Field field, Object target, Object value)
             throws NoSuchFieldException, IllegalAccessException {
@@ -136,8 +133,10 @@ public class ReflectionUtils {
         modifiersField.setInt(field, modifiers);
 
         try {
-            FieldAccessor fa = ReflectionFactory.getReflectionFactory().newFieldAccessor(field, false);
-            fa.set(target, value);
+            //FieldAccessor fa = ReflectionFactory.getReflectionFactory().newFieldAccessor(field, false);
+            field.setAccessible(true);
+            field.set(target, value);
+            //fa.set(target, value);
         } catch (NoSuchMethodError error) {
             field.set(target, value);
         }

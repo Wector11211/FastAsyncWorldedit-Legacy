@@ -22,9 +22,10 @@ import sun.misc.Unsafe;
 import static net.jpountz.util.Utils.NATIVE_BYTE_ORDER;
 
 public enum UnsafeUtils {
-    ;
+    
+	;
 
-    private static final Unsafe UNSAFE;
+	private static final Unsafe UNSAFE;
     private static final long BYTE_ARRAY_OFFSET;
     private static final int BYTE_ARRAY_SCALE;
     private static final long INT_ARRAY_OFFSET;

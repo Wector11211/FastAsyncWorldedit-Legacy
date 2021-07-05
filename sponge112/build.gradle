@@ -47,8 +47,8 @@ dependencies {
 }
 
 minecraft {
-    version = "1.12.2"
-    mappings = "snapshot_20171022"
+    version = "1.12.2-14.23.0.2532"
+    mappings = "snapshot_20171108"
     runDir = 'run'
 }
 

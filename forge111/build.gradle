@@ -12,8 +12,8 @@ buildscript {
     }
 }
 
-apply plugin: 'net.minecraftforge.gradle.forge'
-apply plugin: 'com.github.johnrengelman.shadow'
+#apply plugin: 'net.minecraftforge.gradle.forge'
+#apply plugin: 'com.github.johnrengelman.shadow'
 
 clean { delete "../target" }
 

@@ -6,7 +6,6 @@ import com.boydti.fawe.object.FaweCommand;
 import com.boydti.fawe.object.FawePlayer;
 import com.boydti.fawe.util.Jars;
 import com.boydti.fawe.util.MainUtil;
-import com.boydti.fawe.bukkit.favs.Metrics;
 import com.thevoxelbox.voxelsniper.RangeBlockHelper;
 import com.thevoxelbox.voxelsniper.SnipeData;
 import com.thevoxelbox.voxelsniper.Sniper;
