@@ -53,3 +53,8 @@ jobs:
         run: |
           rm -f ~/.gradle/caches/modules-2/modules-2.lock
           rm -f ~/.gradle/caches/modules-2/gc.properties
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3.1.0
+        with:
+         name: FAWE
+         path: FastAsyncWorldedit-Legacy/fawe/target/FAWE.jar
