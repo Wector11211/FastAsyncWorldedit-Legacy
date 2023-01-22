@@ -42,7 +42,7 @@ jobs:
           key: "${{ runner.os }}-buildtools"
           restore-keys: |
             "${{ runner.os }}-buildtools"
-      - name: "Test Enviornment"
+      - name: "Test Environment"
         run: "echo $GITHUB_WORKSPACE"
       - name: "Download BuildTools"
         run: "wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar"
