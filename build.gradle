@@ -2,11 +2,11 @@ buildscript {
     repositories {
         mavenCentral()
         maven { url = "https://oss.sonatype.org/content/repositories/snapshots/" }
-        jcenter()
+        maven { url "https://plugins.gradle.org/m2/" }
     }
 	dependencies {
         classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
-        classpath 'org.ajoberstar:grgit:1.7.0'
+        classpath "org.ajoberstar.grgit:grgit-gradle:4.0.0"
     }
     configurations.all {
         resolutionStrategy {
@@ -19,7 +19,8 @@ task setupCIWorkspace {
     // do nothing, stub method
 }
 
-apply plugin: 'java'
+apply plugin: "java"
+apply plugin: "org.ajoberstar.grgit"
 clean { delete "target" }
 
 group = 'com.boydti.fawe'
@@ -30,7 +31,7 @@ def semver = ""
 def date = ""
 ext {
     try {
-        git = org.ajoberstar.grgit.Grgit.open(file(".git"))
+        git = Grgit.open()
         date = git.head().date.format("yy.MM.dd")
         revision = "-${git.head().abbreviatedId}"
         parents = git.head().parentIds;
