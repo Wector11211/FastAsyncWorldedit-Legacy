@@ -59,8 +59,13 @@ jobs:
         run: |
           rm -f ~/.gradle/caches/modules-2/modules-2.lock
           rm -f ~/.gradle/caches/modules-2/gc.properties
-      - name: Upload Artifact
+      - name: Upload api artifacts
         uses: actions/upload-artifact@v3
         with:
-         name: "FastWorldEdit-${{ env.release_version }}"
-         path: ./target/
+          name: "fawe-api"
+          path: ./mvn/com/boydti/fawe-api/
+      - name: Upload plugin artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: "FastWorldEdit-${{ env.release_version }}"
+          path: ./target/
