@@ -26,27 +26,29 @@ apply plugin: 'com.github.johnrengelman.shadow'
 
 jar.archiveName="fawe-nukkit-${project.parent.version}.jar"
 jar.destinationDir = file '../mvn/com/boydti/fawe-nukkit/' + project.parent.version
-task createPom << {
-    pom {
-        project {
-            groupId 'com.boydti'
-            artifactId 'fawe-nukkit'
-            version project.parent.version
+task createPom {
+    doLast {
+        pom {
+            project {
+                groupId 'com.boydti'
+                artifactId 'fawe-nukkit'
+                version project.parent.version
+            }
         }
-    }
-    .getEffectivePom()
-            .setDependencies(new ArrayList<>())
-            .writeTo("../mvn/com/boydti/fawe-nukkit/${project.parent.version}/fawe-nukkit-${project.parent.version}.pom")
-    pom {
-        project {
-            groupId 'com.boydti'
-            artifactId 'fawe-nukkit'
-            version 'latest'
+                .getEffectivePom()
+                .setDependencies(new ArrayList<>())
+                .writeTo("../mvn/com/boydti/fawe-nukkit/${project.parent.version}/fawe-nukkit-${project.parent.version}.pom")
+        pom {
+            project {
+                groupId 'com.boydti'
+                artifactId 'fawe-nukkit'
+                version 'latest'
+            }
         }
+                .getEffectivePom()
+                .setDependencies(new ArrayList<>())
+                .writeTo("../mvn/com/boydti/fawe-nukkit/latest/fawe-nukkit-latest.pom")
     }
-    .getEffectivePom()
-            .setDependencies(new ArrayList<>())
-            .writeTo("../mvn/com/boydti/fawe-nukkit/latest/fawe-nukkit-latest.pom")
 }
 task copyFiles {
     doLast {
