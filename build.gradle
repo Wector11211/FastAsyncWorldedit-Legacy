@@ -25,11 +25,11 @@ clean { delete "target" }
 
 group = 'com.boydti.fawe'
 
-def revision = ""
-def buildNumber = ""
-def semver = ""
-def date = ""
 ext {
+    def revision = "unknown"
+    def buildNumber = ""
+    def semver = ""
+    def date = ""
     try {
         git = Grgit.open()
         date = git.head().date.format("yy.MM.dd")
@@ -69,8 +69,8 @@ ext {
         }
         buildNumber = "-${index}"
         semver = "-${major}.${minor}.${patch}"
-    } catch (Throwable ignore) {
-        revision = "unknown";
+    } catch (Throwable e) {
+        e.printStackTrace()
     }
     file("version.txt").text = date + revision + buildNumber + semver
 }
