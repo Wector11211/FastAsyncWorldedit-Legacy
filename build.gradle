@@ -1,12 +1,15 @@
 import org.ajoberstar.grgit.Grgit
 
+group = 'com.boydti.fawe'
+description = """FastAsyncWorldEdit"""
+
 buildscript {
     repositories {
         mavenCentral()
         maven { url = "https://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url "https://plugins.gradle.org/m2/" }
     }
-	dependencies {
+    dependencies {
         classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
         classpath "org.ajoberstar.grgit:grgit-gradle:4.0.0"
     }
@@ -17,15 +20,8 @@ buildscript {
     }
 }
 
-task setupCIWorkspace {
-    // do nothing, stub method
-}
-
-apply plugin: "java"
+apply plugin: 'java'
 apply plugin: "org.ajoberstar.grgit"
-clean { delete "target" }
-
-group = 'com.boydti.fawe'
 
 task setVersion {
     def revision = "unknown"
@@ -71,7 +67,10 @@ if ( project.hasProperty("lzNoVersion") ) { // gradle build -PlzNoVersion
     version = "unknown"
 }
 
-description = """FastAsyncWorldEdit"""
+clean {
+    delete "target"
+}
+
 
 subprojects {
 
@@ -85,7 +84,7 @@ subprojects {
 
     compileJava {
         options.compilerArgs += ["-parameters"]
-		options.encoding = "UTF-8"
+        options.encoding = "UTF-8"
     }
 
     repositories {
@@ -93,7 +92,6 @@ subprojects {
         maven {url "https://mvnrepository.com/artifact/"}
         maven {url "https://repo.dmulloy2.net/content/groups/public/"}
         maven {url "https://repo.destroystokyo.com/repository/maven-public//"}
-        //maven {url "https://ci.emc.gs/nexus/content/groups/aikar/" }
         maven {url "https://ci.athion.net/plugin/repository/tools/"}
         maven {url "https://jitpack.io"}
         mavenLocal()
@@ -103,15 +101,14 @@ subprojects {
         maven {url "https://repo.maven.apache.org/maven2"}
         maven {url "https://ci.frostcast.net/plugin/repository/everything"}
         maven {url "https://repo.spongepowered.org/maven"}
-        maven {url "https://dl.bintray.com/tastybento/maven-repo"}
         maven {url "https://repo.inventivetalent.org/content/groups/public/"}
         maven {url "https://store.ttyh.ru/libraries/"}
         maven {url "https://repo.dmulloy2.net/nexus/repository/public/"}
         maven {url "https://maven.elmakers.com/repository/"}
         maven {url "https://ci.ender.zone/plugin/repository/everything/"}
-        //maven {url "https://plotsquared.com/mvn/"}
     }
 }
+
 task aggregatedJavadocs(type: Javadoc, description: 'Generate javadocs from all child projects as if it was a single project', group: 'Documentation') {
     destinationDir = file("./docs/javadoc")
     title = "$project.name $version API"
