@@ -26,14 +26,14 @@ jobs:
           restore-keys: |
             "${{ runner.os }}-gradle-"
       - name: "Cache Local Maven Repository"
-        uses: "actions/cache@v2.1.4"
+        uses: "actions/cache@v3"
         with:
           path: "~/.m2/repository"
           key: "${{ runner.os }}-${{ matrix.java }}-maven-${{ hashFiles('**/pom.xml') }}"
           restore-keys: |
             "${{ runner.os }}-${{ matrix.java }}-maven-"
       - name: "Cache BuildTools Decompiled Code"
-        uses: "actions/cache@v2.1.4"
+        uses: "actions/cache@v3"
         with:
           path: "$GITHUB_WORKSPACE/work"
           key: "${{ runner.os }}-buildtools"
@@ -54,7 +54,7 @@ jobs:
           rm -f ~/.gradle/caches/modules-2/modules-2.lock
           rm -f ~/.gradle/caches/modules-2/gc.properties
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3.1.0
+        uses: actions/upload-artifact@v3
         with:
          name: FAWE
          path: ./target/
