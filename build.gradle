@@ -39,10 +39,11 @@ ext {
         index = -67;  // Offset to match CI
         int major, minor, patch;
         major = minor = patch = 0;
-        for (; parents != null && !parents.isEmpty(); index++) {
+        def commits = git.log().iterator()
+        while (commits.hasNext()) {
             int majorCount, minorCount, patchCount;
             patchCount = minor == 0 && major == 0 ? 1 : 0;
-            commit = git.getResolve().toCommit(parents.get(0));
+            def commit = commits.next()
             for (String line : commit.fullMessage.tokenize("\n")) {
                 switch (line.replaceAll("- ", "").split(" ")[0].toLowerCase()) {
                     case "minor":
