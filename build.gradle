@@ -34,6 +34,7 @@ ext {
         git = Grgit.open()
         date = git.head().date.format("yy.MM.dd")
         revision = "-${git.head().abbreviatedId}"
+        println "Total number of commits: " + git.log().size()
         parents = git.head().parentIds;
         index = -67;  // Offset to match CI
         int major, minor, patch;
@@ -72,13 +73,15 @@ ext {
     } catch (Throwable e) {
         e.printStackTrace()
     }
-    file("version.txt").text = date + revision + buildNumber + semver
+    version = date + revision + buildNumber + semver
+    file("version.txt").text = version
+    println "===\n" + version + "\n==="
 }
 
-version = date + revision + buildNumber + semver
 if ( project.hasProperty("lzNoVersion") ) { // gradle build -PlzNoVersion
     version = "unknown"
 }
+
 description = """FastAsyncWorldEdit"""
 
 subprojects {
