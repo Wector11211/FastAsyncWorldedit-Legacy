@@ -72,6 +72,7 @@ ext {
     } catch (Throwable ignore) {
         revision = "unknown";
     }
+    file("version.txt").text = date + revision + buildNumber + semver
 }
 
 version = date + revision + buildNumber + semver
